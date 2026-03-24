@@ -5,77 +5,53 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
 import Link from "next/link";
 
-import { registerSchema, RegisterFormData } from "@/schemas/register.schema";
+import { loginSchema, LoginFormData } from "@/schemas/login.schema";
 import { authService } from "@/services/auth.service";
+import { useAuthStore } from "@/store/auth.store";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 
-export default function RegisterPage() {
+export default function LoginPage() {
   const router = useRouter();
+  const { setToken } = useAuthStore();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerSchema),
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
   });
 
   const { mutate, isPending } = useMutation({
-    mutationFn: authService.register,
-    onSuccess: (data, variables) => {
+    mutationFn: authService.login,
+    onSuccess: (data) => {
       toast.success(data.message);
-      router.push(`/verify-otp?email=${encodeURIComponent(variables.email)}`);
+      setToken(data.token);
+      router.push("/dashboard");
     },
     onError: (error: any) => {
-      toast.error(error.detail || "Registration failed");
+      toast.error(error.detail || "Login failed");
     },
   });
 
-  const onSubmit = (data: RegisterFormData) => {
+  const onSubmit = (data: LoginFormData) => {
     mutate(data);
   };
 
   return (
     <Card className="border-0 shadow-none">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl font-bold">Create Account</CardTitle>
-        <CardDescription>Sign up to get started</CardDescription>
+        <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+        <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              placeholder="johndoe"
-              {...register("username")}
-            />
-            {errors.username && (
-              <p className="text-sm text-red-500">{errors.username.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input id="name" placeholder="John Doe" {...register("name")} />
-            {errors.name && (
-              <p className="text-sm text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -103,17 +79,14 @@ export default function RegisterPage() {
           </div>
 
           <Button type="submit" className="w-full" disabled={isPending}>
-            {isPending ? "Creating account..." : "Sign Up"}
+            {isPending ? "Signing in..." : "Sign In"}
           </Button>
         </form>
 
         <p className="text-center text-sm text-muted-foreground mt-6">
-          Already have an account?{" "}
-          <Link
-            href="/login"
-            className="text-primary hover:underline font-medium"
-          >
-            Sign in
+          Don't have an account?{" "}
+          <Link href="/register" className="text-primary hover:underline font-medium">
+            Sign up
           </Link>
         </p>
       </CardContent>

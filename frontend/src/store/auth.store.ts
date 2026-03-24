@@ -11,7 +11,7 @@ interface AuthState {
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+  token: null,
 
   setUser: (user) => set({ user }),
 
@@ -29,3 +29,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ user: null, token: null });
   },
 }));
+
+// Hydrate token from localStorage on client side only
+if (typeof window !== "undefined") {
+  const token = localStorage.getItem("token");
+  if (token) {
+    useAuthStore.setState({ token });
+  }
+}

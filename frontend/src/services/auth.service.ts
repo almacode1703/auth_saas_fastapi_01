@@ -41,6 +41,7 @@ export const authService = {
   },
 
   getMe: (): Promise<User> => {
-    return api("/auth/me");
-  },
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  return api(`/auth/me?token=${token}`);
+},
 };

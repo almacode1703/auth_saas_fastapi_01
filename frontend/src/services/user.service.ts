@@ -3,6 +3,8 @@ import { User } from "@/types/auth.types";
 
 export const userService = {
   getProfile: (): Promise<User> => {
-    return api("/auth/me");
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    return api(`/auth/me?token=${token}`);
   },
 };

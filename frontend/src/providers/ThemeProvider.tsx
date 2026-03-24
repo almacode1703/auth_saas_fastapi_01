@@ -1,8 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+
+    // Suppress false positive script warning from next-themes in React 19
+    const originalError = console.error;
+    console.error = (...args: any[]) => {
+      if (typeof args[0] === "string" && args[0].includes("Encountered a script tag")) {
+        return;
+      }
+      originalError(...args);
+    };
+
+    return () => {
+      console.error = originalError;
+    };
+  }, []);
+
+  if (!mounted) return <>{children}</>;
+
   return (
     <NextThemesProvider
       attribute="class"
