@@ -16,7 +16,7 @@ export default function ProtectedLayout({
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
     if (!storedToken) {
-      router.push("/login");
+      router.replace("/login");
     } else {
       if (!token) {
         useAuthStore.setState({ token: storedToken });
@@ -24,7 +24,6 @@ export default function ProtectedLayout({
       setIsChecking(false);
     }
   }, [token, router]);
-
   if (isChecking) return null;
 
   return <>{children}</>;

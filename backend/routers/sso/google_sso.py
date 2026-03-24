@@ -11,13 +11,13 @@ router = APIRouter()
 
 
 # google oauth
-@router.get("/google/login")
+@router.get("/login")
 async def google_login():
     auth_url = await get_google_auth_url()
     return {"auth_url": auth_url}
 
 
-@router.get("/google/callback")
+@router.get("/callback")
 async def google_callback(code: str, db: Session = Depends(get_db)):
     try:
         # Step 1 - get user info from Google using the code

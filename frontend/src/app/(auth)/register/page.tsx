@@ -21,6 +21,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import SocialButtons from "@/components/auth/SocialButtons";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -105,7 +106,18 @@ export default function RegisterPage() {
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? "Creating account..." : "Sign Up"}
           </Button>
-        </form>
+      </form>
+
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+          </div>
+        </div>
+
+        <SocialButtons />
 
         <p className="text-center text-sm text-muted-foreground mt-6">
           Already have an account?{" "}
