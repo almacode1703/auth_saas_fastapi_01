@@ -33,31 +33,33 @@ export default function AuthLayout({
 
   const currentAnimation = animationMap[pathname] || animationMap["/login"];
 
-  return (
-    <div className="min-h-screen flex flex-col md:flex-row bg-background">
-      {/* Animation - Top on mobile, Left on tablet, Right on desktop */}
-      <div className="w-full md:w-[35%] lg:w-[40%] bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-6 md:p-4 lg:p-12 md:order-1 lg:order-2">
+return (
+    <div className="h-screen flex flex-col md:flex-row bg-background overflow-hidden">
+      {/* Animation */}
+      <div className="shrink-0 h-32 md:h-auto md:w-[35%] lg:w-[40%] bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4 lg:p-8 md:order-1 lg:order-2">
         <motion.div
           key={pathname}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="w-32 h-32 md:w-full md:max-w-xs lg:max-w-md"
+          className="w-24 h-24 md:w-full md:max-w-xs lg:max-w-md"
         >
           <LottieAnimation src={currentAnimation} />
         </motion.div>
       </div>
 
-      {/* Form - Bottom on mobile, Right on tablet, Left on desktop */}
-      <div className="w-full md:w-[65%] lg:w-[60%] flex items-center justify-center p-6 md:p-4 lg:p-8 md:order-2 lg:order-1">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="w-full max-w-md"
-        >
-          {children}
-        </motion.div>
+      {/* Form */}
+      <div className="flex-1 overflow-y-auto md:w-[65%] lg:w-[60%] md:order-2 lg:order-1">
+        <div className="min-h-full flex items-center justify-center py-6 px-4 lg:p-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="w-full max-w-md"
+          >
+            {children}
+          </motion.div>
+        </div>
       </div>
     </div>
   );
