@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/store/auth.store";
+import Navbar from "@/components/shared/Navbar";
 
 export default function ProtectedLayout({
   children,
@@ -24,7 +25,13 @@ export default function ProtectedLayout({
       setIsChecking(false);
     }
   }, [token, router]);
+
   if (isChecking) return null;
 
-  return <>{children}</>;
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>{children}</main>
+    </div>
+  );
 }
