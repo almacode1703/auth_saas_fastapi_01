@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import LottieAnimation from "@/components/shared/LottieAnimations";
+import Logo from "@/components/shared/Logo";
 
 const animationMap: Record<string, string> = {
   "/login": "/animations/Login.json",
@@ -33,7 +34,7 @@ export default function AuthLayout({
 
   const currentAnimation = animationMap[pathname] || animationMap["/login"];
 
-return (
+  return (
     <div className="h-screen flex flex-col md:flex-row bg-background overflow-hidden">
       {/* Animation */}
       <div className="shrink-0 h-32 md:h-auto md:w-[35%] lg:w-[40%] bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4 lg:p-8 md:order-1 lg:order-2">
@@ -57,6 +58,9 @@ return (
             transition={{ duration: 0.5 }}
             className="w-full max-w-md"
           >
+            <div className="mb-6 flex justify-center">
+              <Logo />
+            </div>
             {children}
           </motion.div>
         </div>

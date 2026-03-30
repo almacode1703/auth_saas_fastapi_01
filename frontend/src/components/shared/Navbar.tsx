@@ -5,9 +5,12 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "./Logo";
 
 import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
+import { Settings, LogOut , MessageSquare, LayoutDashboard } from "lucide-react";
+
 
 export default function Navbar() {
   const router = useRouter();
@@ -55,9 +58,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Left - Logo */}
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold">Auth SaaS</span>
-          </div>
+          <Logo />
 
           {/* Right - Profile */}
           <div className="relative" ref={dropdownRef}>
@@ -124,16 +125,37 @@ export default function Navbar() {
                     <button
                       onClick={() => {
                         setIsOpen(false);
-                        // Settings page - coming later
+                        router.push("/dashboard");
                       }}
-                      className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
                     >
+                      <LayoutDashboard className="w-4 h-4" />
+                      Dashboard
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        router.push("/rag-chat");
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      RAG Chat
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                    >
+                      <Settings className="w-4 h-4" />
                       Settings
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-muted text-red-500 transition-colors"
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted text-red-500 transition-colors"
                     >
+                      <LogOut className="w-4 h-4" />
                       Logout
                     </button>
                   </div>

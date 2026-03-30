@@ -20,5 +20,18 @@ services:
       - db
     restart: on-failure
 
+  rag-service:
+    build: ./rag-service
+    ports:
+      - "8001:8001"
+    env_file:
+      - ./rag-service/.env
+    volumes:
+      - rag_data:/app/data
+      - rag_vector_db:/app/vector_db
+    restart: on-failure
+
 volumes:
   authsaas_data:
+  rag_data:
+  rag_vector_db:
