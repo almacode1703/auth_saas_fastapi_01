@@ -13,7 +13,7 @@ export default function Logo({ size = "sm" }: LogoProps) {
   const isLarge = size === "lg";
 
   return (
-    <Link href="/dashboard" className="flex items-center gap-3 group">
+    <Link href="/" className="flex items-center gap-3 group">
       <motion.div
         whileHover={{ rotate: 10 }}
         whileTap={{ scale: 0.9 }}

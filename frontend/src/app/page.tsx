@@ -50,6 +50,9 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
+            <Button variant="ghost" onClick={() => router.push("/")}>
+              Home
+            </Button>
             <Button variant="ghost" onClick={() => router.push("/pricing")}>
               Pricing
             </Button>
@@ -70,6 +73,12 @@ export default function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
+          <h1 className="text-6xl md:text-8xl lg:text-9xl tracking-wider mb-4 font-[family-name:var(--font-bebas)]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-yellow-300 to-green-400">
+              INSTASHARK
+            </span>
+          </h1>
+
           <div className="inline-flex items-center gap-2 bg-muted px-4 py-1.5 rounded-full text-sm text-muted-foreground mb-6">
             <Zap className="w-3.5 h-3.5" />
             AI-Powered Platform

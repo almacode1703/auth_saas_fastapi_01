@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Nunito, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import Providers from "@/providers/Providers";
 
 const nunito = Nunito({
   variable: "--font-nunito",
+  subsets: ["latin"],
+});
+
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -21,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} h-full antialiased`}
+      className={`${nunito.variable} ${bebasNeue.variable} h-full antialiased dark`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-nunito)]">
