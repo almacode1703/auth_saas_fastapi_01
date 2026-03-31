@@ -31,6 +31,14 @@ services:
       - rag_vector_db:/app/vector_db
     restart: on-failure
 
+  image-service:
+    build: ./image-service
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./image-service/.env
+    restart: on-failure
+
 volumes:
   authsaas_data:
   rag_data:

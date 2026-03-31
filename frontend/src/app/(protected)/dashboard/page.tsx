@@ -37,8 +37,8 @@ const services = [
     description: "Generate stunning images with text prompts",
     icon: Image,
     gradient: "from-orange-500 to-red-500",
-    status: "coming soon",
-    route: null,
+    status: "active",
+    route: "/image-gen",
   },
   {
     name: "Analytics",

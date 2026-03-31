@@ -9,8 +9,7 @@ import Logo from "./Logo";
 
 import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
-import { Settings, LogOut , MessageSquare, LayoutDashboard } from "lucide-react";
-
+import { Settings, LogOut, LayoutDashboard, MessageSquare, ImageIcon } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -141,6 +140,16 @@ export default function Navbar() {
                     >
                       <MessageSquare className="w-4 h-4" />
                       RAG Chat
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        router.push("/image-gen");
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                    >
+                      <ImageIcon className="w-4 h-4" />
+                      Image Gen
                     </button>
                     <button
                       onClick={() => {

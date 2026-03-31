@@ -37,13 +37,13 @@ export default function AuthLayout({
   return (
     <div className="h-screen flex flex-col md:flex-row bg-background overflow-hidden">
       {/* Animation */}
-      <div className="shrink-0 h-32 md:h-auto md:w-[35%] lg:w-[40%] bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4 lg:p-8 md:order-1 lg:order-2">
+      <div className="shrink-0 h-32 md:h-full md:w-[35%] lg:w-[40%] bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-700 flex items-center justify-center p-4 lg:p-8 md:order-1 lg:order-2">
         <motion.div
           key={pathname}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="w-24 h-24 md:w-full md:max-w-xs lg:max-w-md"
+          className="w-24 h-24 md:h-auto md:w-full md:max-w-xs md:max-h-[70vh] lg:max-w-md lg:max-h-[75vh]"
         >
           <LottieAnimation src={currentAnimation} />
         </motion.div>
