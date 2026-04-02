@@ -9,7 +9,6 @@ services:
       - "5432:5432"
     volumes:
       - authsaas_data:/var/lib/postgresql/data
-
   backend:
     build: ./backend
     ports:
@@ -38,7 +37,13 @@ services:
     env_file:
       - ./image-service/.env
     restart: on-failure
-
+  voice-service:
+    build: ./voice-service
+    ports:
+      - "8003:8003"
+    env_file:
+      - ./voice-service/.env
+    restart: on-failure
 volumes:
   authsaas_data:
   rag_data:

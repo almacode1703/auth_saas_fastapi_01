@@ -9,14 +9,7 @@ import Logo from "./Logo";
 
 import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
-import {
-  Settings,
-  LogOut,
-  LayoutDashboard,
-  MessageSquare,
-  ImageIcon,
-  Home,
-} from "lucide-react";
+import { Settings, LogOut, LayoutDashboard, MessageSquare, ImageIcon, Home, Volume2 } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
@@ -167,6 +160,16 @@ export default function Navbar() {
                     >
                       <ImageIcon className="w-4 h-4" />
                       Image Gen
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsOpen(false);
+                        router.push("/voice-agent");
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+                    >
+                      <Volume2 className="w-4 h-4" />
+                      Voice Agent
                     </button>
                     <button
                       onClick={() => {

@@ -49,12 +49,12 @@ const services = [
     route: null,
   },
   {
-    name: "AI Assistant",
-    description: "Your personal AI assistant for everyday tasks",
+    name: "AI Voice Agent",
+    description: "Talk to your AI assistant with voice or text",
     icon: Bot,
     gradient: "from-violet-500 to-purple-500",
-    status: "coming soon",
-    route: null,
+    status: "active",
+    route: "/voice-agent",
   },
   {
     name: "Automation",
