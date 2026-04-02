@@ -29,10 +29,11 @@ app.post("/assistant", async (req, res) => {
       return res.json({ assistantId: assistants[voice] });
     }
 
-    const voiceConfig = voice === "ayushi"
-      ? { provider: "azure", voiceId: "ava" }
-      : { provider: "azure", voiceId: "andrew" };
-
+    const voiceConfig =
+      voice === "ayushi"
+        ? { provider: "azure", voiceId: "en-US-AvaNeural" }
+        : { provider: "azure", voiceId: "en-US-AndrewNeural" };
+        
     const assistant = await vapi.assistants.create({
       name: `Voice Agent - ${voice}`,
       model: {
@@ -52,7 +53,9 @@ app.post("/assistant", async (req, res) => {
     res.json({ assistantId: assistant.id });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: err.message || "Failed to create assistant" });
+    res
+      .status(500)
+      .json({ error: err.message || "Failed to create assistant" });
   }
 });
 
@@ -86,7 +89,8 @@ app.post("/chat", async (req, res) => {
     });
 
     const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
+    const reply =
+      data.choices?.[0]?.message?.content || "Sorry, I couldn't process that.";
 
     res.json({ reply, voice: voiceName });
   } catch (err) {
