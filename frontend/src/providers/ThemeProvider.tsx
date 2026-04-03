@@ -9,7 +9,6 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
   useEffect(() => {
     setMounted(true);
 
-    // Suppress false positive script warning from next-themes in React 19
     const originalError = console.error;
     console.error = (...args: any[]) => {
       if (typeof args[0] === "string" && args[0].includes("Encountered a script tag")) {
@@ -30,6 +29,7 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
       attribute="class"
       defaultTheme="dark"
       enableSystem
+      themes={["light", "dark", "glass"]}
     >
       {children}
     </NextThemesProvider>

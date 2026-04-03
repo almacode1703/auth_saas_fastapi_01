@@ -50,7 +50,7 @@ export default function AuthLayout({
       </div>
 
       {/* Form */}
-      <div className="flex-1 overflow-y-auto md:w-[65%] lg:w-[60%] md:order-2 lg:order-1">
+      <div className="flex-1 overflow-y-auto scrollbar-styled md:w-[65%] lg:w-[60%] md:order-2 lg:order-1">
         <div className="min-h-full flex items-center justify-center py-6 px-4 lg:p-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

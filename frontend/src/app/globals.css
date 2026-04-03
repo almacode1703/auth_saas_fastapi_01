@@ -132,3 +132,76 @@
 button {
   cursor: pointer;
 }
+
+/* ============================================================
+   Custom Scrollbars — styled to match the app's purple/blue/cyan palette
+   ============================================================ */
+
+/* --- Primary scrollbar: purple → indigo gradient (auth pages, page-level) --- */
+.scrollbar-styled {
+  scrollbar-width: thin;
+  scrollbar-color: #a855f7 oklch(0.18 0.025 285 / 50%);
+}
+.scrollbar-styled::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar-styled::-webkit-scrollbar-track {
+  background: oklch(0.18 0.025 285 / 50%);
+  border-radius: 9999px;
+}
+.scrollbar-styled::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #c084fc, #a855f7, #6366f1);
+  border-radius: 9999px;
+  border: 1px solid oklch(0.18 0.025 285 / 30%);
+}
+.scrollbar-styled::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #d8b4fe, #c084fc, #818cf8);
+}
+
+/* --- Chat scrollbar: cyan → blue gradient (inner panels) --- */
+.scrollbar-chat {
+  scrollbar-width: thin;
+  scrollbar-color: #22d3ee oklch(0.18 0.03 220 / 30%);
+}
+.scrollbar-chat::-webkit-scrollbar {
+  width: 4px;
+}
+.scrollbar-chat::-webkit-scrollbar-track {
+  background: oklch(0.18 0.03 220 / 30%);
+  border-radius: 9999px;
+}
+.scrollbar-chat::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #67e8f9, #22d3ee, #3b82f6);
+  border-radius: 9999px;
+}
+.scrollbar-chat::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #a5f3fc, #67e8f9, #60a5fa);
+}
+
+.glass {
+  --background: 220 20% 10%;
+  --foreground: 210 40% 98%;
+  --card: 220 20% 14%;
+  --card-foreground: 210 40% 98%;
+  --popover: 220 20% 14%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 250 80% 65%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 220 20% 18%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 220 20% 18%;
+  --muted-foreground: 215 20% 55%;
+  --accent: 220 20% 18%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62% 50%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 220 20% 22%;
+  --input: 220 20% 22%;
+  --ring: 250 80% 65%;
+}
+
+.glass .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}

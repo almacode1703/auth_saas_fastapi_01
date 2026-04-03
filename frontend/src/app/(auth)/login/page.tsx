@@ -17,7 +17,13 @@ import SocialButtons from "@/components/auth/SocialButtons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -125,7 +131,9 @@ export default function LoginPage() {
             transition={{ delay: 0.3 }}
           >
             <Button type="submit" className="w-full group" disabled={isPending}>
-              {isPending ? "Signing in..." : (
+              {isPending ? (
+                "Signing in..."
+              ) : (
                 <>
                   Sign In
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -142,10 +150,14 @@ export default function LoginPage() {
         >
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
+              <span className="w-full" />
             </div>
             <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+              <div className="my-6 text-center">
+                <span className="text-xs uppercase text-info text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
             </div>
           </div>
 
@@ -153,7 +165,10 @@ export default function LoginPage() {
 
           <p className="text-center text-sm text-muted-foreground mt-6">
             Don't have an account?{" "}
-            <Link href="/register" className="text-primary hover:underline font-medium">
+            <Link
+              href="/register"
+              className="text-primary hover:underline font-medium"
+            >
               Sign up
             </Link>
           </p>

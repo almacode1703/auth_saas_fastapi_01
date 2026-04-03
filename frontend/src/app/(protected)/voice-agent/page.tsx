@@ -383,7 +383,7 @@ export default function VoiceAgentPage() {
               </div>
 
               {/* Chat messages */}
-              <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+              <div className="flex-1 overflow-y-auto scrollbar-chat px-4 py-4 space-y-3">
                 {chatMessages.length === 0 && (
                   <div className="h-full flex flex-col items-center justify-center text-center">
                     <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mb-3">

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Check, X, Zap, Crown, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/shared/Logo";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 const plans = [
   {
@@ -76,6 +77,10 @@ export default function PricingPage() {
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
+            <ThemeToggle />
+            <Button variant="ghost" onClick={() => router.push("/")}>
+              Home
+            </Button>
             <Button variant="ghost" onClick={() => router.push("/login")}>
               Sign In
             </Button>

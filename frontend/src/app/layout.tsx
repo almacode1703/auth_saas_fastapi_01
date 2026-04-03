@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.variable} ${bebasNeue.variable} h-full antialiased dark`}
+      className={`${nunito.variable} ${bebasNeue.variable} h-full antialiased dark `}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-[family-name:var(--font-nunito)]">
