@@ -15,8 +15,40 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: "Auth SaaS",
-  description: "Authentication system with Next.js and FastAPI",
+  title: {
+    default: "InstAShark | AI-Powered Platform",
+    template: "%s | InstAShark",
+  },
+  description:
+    "InstAShark brings together powerful AI tools — RAG chat, image generation, voice agents, analytics — all behind secure authentication. Start free today.",
+  keywords: [
+    "AI platform",
+    "RAG chat",
+    "image generation",
+    "voice agent",
+    "DALL-E",
+    "LangChain",
+    "AI SaaS",
+    "InstAShark",
+    "ChatGPT",
+    "AI tools",
+  ],
+  openGraph: {
+    title: "InstAShark | AI-Powered Platform",
+    description:
+      "Your AI Services, One Platform. RAG Chat, Image Generation, Voice Agents, and more.",
+    type: "website",
+    siteName: "InstAShark",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "InstAShark | AI-Powered Platform",
+    description: "Your AI Services, One Platform.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
