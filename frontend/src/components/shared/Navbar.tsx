@@ -31,7 +31,6 @@ export default function Navbar() {
     queryFn: authService.getMe,
   });
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -51,7 +50,6 @@ export default function Navbar() {
     router.replace("/login");
   };
 
-  // Get initials from name (e.g., "John Doe" → "JD")
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -65,10 +63,8 @@ export default function Navbar() {
     <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          {/* Left - Logo */}
           <Logo />
 
-          {/* Right - Profile */}
           <div className="flex items-center gap-3">
             <ThemeToggle />
             <div className="relative" ref={dropdownRef}>
@@ -79,7 +75,6 @@ export default function Navbar() {
                 {user?.name ? getInitials(user.name) : "?"}
               </button>
 
-              {/* Dropdown */}
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
@@ -89,8 +84,6 @@ export default function Navbar() {
                     transition={{ duration: 0.2 }}
                     className="absolute right-0 mt-2 w-64 rounded-lg border border-border bg-background shadow-lg"
                   >
-                    {/* User info */}
-
                     <div className="p-4 border-b border-border">
                       <p className="font-semibold">{user?.name || "User"}</p>
                       <p className="text-sm text-muted-foreground">
@@ -98,7 +91,6 @@ export default function Navbar() {
                       </p>
                     </div>
 
-                    {/* Profile details */}
                     <div className="p-4 border-b border-border space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Username</span>
@@ -130,7 +122,6 @@ export default function Navbar() {
                       </div>
                     </div>
 
-                    {/* Menu items */}
                     <div className="p-2">
                       <button
                         onClick={() => {
@@ -185,6 +176,7 @@ export default function Navbar() {
                       <button
                         onClick={() => {
                           setIsOpen(false);
+                          router.push("/settings");
                         }}
                         className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
                       >
