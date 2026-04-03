@@ -10,6 +10,7 @@ import { authService } from "@/services/auth.service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import AvatarUpload from "./AvatarUpload";
 
 export default function AccountSettings() {
   const queryClient = useQueryClient();
@@ -44,7 +45,13 @@ export default function AccountSettings() {
       {/* Profile section */}
       <div className="border border-border rounded-xl p-6">
         <h3 className="font-semibold text-lg mb-1">Profile Information</h3>
-        <p className="text-sm text-muted-foreground mb-6">Update your personal details</p>
+        <p className="text-sm text-muted-foreground mb-6">
+          Update your personal details
+        </p>
+
+        <div className="mb-6 pb-6 border-b border-border">
+          <AvatarUpload />
+        </div>
 
         <div className="space-y-4">
           <motion.div
@@ -57,7 +64,10 @@ export default function AccountSettings() {
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 value={name || user?.name || ""}
-                onChange={(e) => { setName(e.target.value); setIsEditing(true); }}
+                onChange={(e) => {
+                  setName(e.target.value);
+                  setIsEditing(true);
+                }}
                 placeholder="Your full name"
                 className="pl-10"
               />
@@ -75,7 +85,10 @@ export default function AccountSettings() {
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 value={username || user?.username || ""}
-                onChange={(e) => { setUsername(e.target.value); setIsEditing(true); }}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  setIsEditing(true);
+                }}
                 placeholder="Your username"
                 className="pl-10"
               />
@@ -97,7 +110,9 @@ export default function AccountSettings() {
                 className="pl-10 opacity-60"
               />
             </div>
-            <p className="text-xs text-muted-foreground">Email cannot be changed for security reasons</p>
+            <p className="text-xs text-muted-foreground">
+              Email cannot be changed for security reasons
+            </p>
           </motion.div>
 
           <motion.div
@@ -111,7 +126,10 @@ export default function AccountSettings() {
               <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 value={phone}
-                onChange={(e) => { setPhone(e.target.value); setIsEditing(true); }}
+                onChange={(e) => {
+                  setPhone(e.target.value);
+                  setIsEditing(true);
+                }}
                 placeholder="+91 98765 43210"
                 className="pl-10"
               />
@@ -141,23 +159,31 @@ export default function AccountSettings() {
       {/* Account info */}
       <div className="border border-border rounded-xl p-6">
         <h3 className="font-semibold text-lg mb-1">Account Details</h3>
-        <p className="text-sm text-muted-foreground mb-6">Your account information</p>
+        <p className="text-sm text-muted-foreground mb-6">
+          Your account information
+        </p>
 
         <div className="space-y-3">
           <div className="flex items-center justify-between py-2 border-b border-border">
             <span className="text-sm text-muted-foreground">Provider</span>
-            <span className="text-sm font-medium capitalize">{user?.provider || "email"}</span>
+            <span className="text-sm font-medium capitalize">
+              {user?.provider || "email"}
+            </span>
           </div>
           <div className="flex items-center justify-between py-2 border-b border-border">
             <span className="text-sm text-muted-foreground">Status</span>
-            <span className={`text-sm font-medium ${user?.is_active ? "text-green-500" : "text-red-500"}`}>
+            <span
+              className={`text-sm font-medium ${user?.is_active ? "text-green-500" : "text-red-500"}`}
+            >
               {user?.is_active ? "Active" : "Inactive"}
             </span>
           </div>
           <div className="flex items-center justify-between py-2">
             <span className="text-sm text-muted-foreground">Joined</span>
             <span className="text-sm font-medium">
-              {user?.created_at ? new Date(user.created_at).toLocaleDateString() : "N/A"}
+              {user?.created_at
+                ? new Date(user.created_at).toLocaleDateString()
+                : "N/A"}
             </span>
           </div>
         </div>
@@ -166,8 +192,13 @@ export default function AccountSettings() {
       {/* Danger zone */}
       <div className="border border-red-500/30 rounded-xl p-6">
         <h3 className="font-semibold text-lg text-red-500 mb-1">Danger Zone</h3>
-        <p className="text-sm text-muted-foreground mb-4">Irreversible actions</p>
-        <Button variant="outline" className="border-red-500/50 text-red-500 hover:bg-red-500/10">
+        <p className="text-sm text-muted-foreground mb-4">
+          Irreversible actions
+        </p>
+        <Button
+          variant="outline"
+          className="border-red-500/50 text-red-500 hover:bg-red-500/10"
+        >
           Delete Account
         </Button>
       </div>

@@ -9,6 +9,8 @@ from routers.sso import google_sso, github_sso
 from config import FRONTEND_URL
 from routers import otp
 
+from routers import profile
+from fastapi.staticfiles import StaticFiles
 
 # Create tables in postgres on startup
 Base.metadata.create_all(bind=engine)
@@ -35,5 +37,11 @@ app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(google_sso.router, prefix="/auth/google", tags=["google-sso"])
 app.include_router(github_sso.router,  prefix="/auth/github", tags=["github-sso"])
 
-#Otp Routes
+# Otp Routes
 app.include_router(otp.router, prefix="/auth", tags=["otp"])
+
+# Profile Routes
+app.include_router(profile.router, prefix="/auth/profile", tags=["profile"])
+
+# Static files (avatars)
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")

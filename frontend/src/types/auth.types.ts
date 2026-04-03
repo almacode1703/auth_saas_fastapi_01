@@ -44,5 +44,6 @@ export interface User {
     email: string;
     is_active: boolean;
     provider: string;
+    avatar: string | null;
     created_at: string;
 }

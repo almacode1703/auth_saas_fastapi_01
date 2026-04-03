@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "./Logo";
+import { API_URL } from "@/lib/constants";
 
 import { authService } from "@/services/auth.service";
 import { useAuthStore } from "@/store/auth.store";
@@ -70,11 +71,20 @@ export default function Navbar() {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm hover:opacity-90 transition-opacity"
+                className="w-10 h-10 rounded-full overflow-hidden bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm hover:opacity-90 transition-opacity"
               >
-                {user?.name ? getInitials(user.name) : "?"}
+                {user?.avatar ? (
+                  <img
+                    src={`${API_URL}${user.avatar}`}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                ) : user?.name ? (
+                  getInitials(user.name)
+                ) : (
+                  "?"
+                )}
               </button>
-
               <AnimatePresence>
                 {isOpen && (
                   <motion.div
