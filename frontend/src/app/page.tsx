@@ -13,6 +13,10 @@ import {
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/shared/Logo";
 import ThemeToggle from "@/components/shared/ThemeToggle";
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { authService } from "@/services/auth.service";
+import { API_URL } from "@/lib/constants";
 
 const features = [
   {
@@ -43,27 +47,76 @@ const features = [
 
 export default function LandingPage() {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const { data: user } = useQuery({
+    queryKey: ["user"],
+    queryFn: authService.getMe,
+    enabled: isLoggedIn,
+  });
+
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((w) => w[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2);
+  };
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Navbar */}
+      {/* Navbar */}
       {/* Navbar */}
       <nav className="border-b border-border bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Logo />
           <div className="flex items-center gap-3">
             <ThemeToggle />
-            <Button variant="ghost" onClick={() => router.push("/")}>
-              Home
-            </Button>
             <Button variant="ghost" onClick={() => router.push("/pricing")}>
               Pricing
             </Button>
-            <Button variant="ghost" onClick={() => router.push("/login")}>
-              Sign In
-            </Button>
-            <Button onClick={() => router.push("/register")}>
-              Get Started
-            </Button>
+            {isLoggedIn ? (
+              <>
+                <Button
+                  variant="ghost"
+                  onClick={() => router.push("/dashboard")}
+                >
+                  Dashboard
+                </Button>
+                <button
+                  onClick={() => router.push("/dashboard")}
+                  className="w-9 h-9 rounded-full overflow-hidden bg-primary text-primary-foreground flex items-center justify-center font-semibold text-sm hover:opacity-90 transition-opacity"
+                >
+                  {user?.avatar ? (
+                    <img
+                      src={`${API_URL}${user.avatar}`}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : user?.name ? (
+                    getInitials(user.name)
+                  ) : (
+                    "?"
+                  )}
+                </button>
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" onClick={() => router.push("/login")}>
+                  Sign In
+                </Button>
+                <Button onClick={() => router.push("/register")}>
+                  Get Started
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </nav>
