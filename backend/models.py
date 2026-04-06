@@ -14,6 +14,7 @@ class User(Base):
     is_verified = Column(Boolean, default=False)
     provider = Column(String, default="local")
     avatar = Column(String, nullable=True)
+    phone = Column(String, nullable=True)
     
     # For Otp
     otp_code = Column(String, nullable=True)

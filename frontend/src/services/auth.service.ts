@@ -59,6 +59,33 @@ export const authService = {
 
     return response.json();
   },
+
+  updateProfile: async (data: {
+    name?: string;
+    username?: string;
+    phone?: string;
+  }) => {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
+    const response = await fetch(
+      `${API_URL}/auth/profile/update?token=${token}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      },
+    );
+
+    if (!response.ok) {
+      const error = await response
+        .json()
+        .catch(() => ({ detail: "Update failed" }));
+      throw error;
+    }
+
+    return response.json();
+  },
   register: (data: RegisterRequest): Promise<RegisterResponse> => {
     return api("/auth/register", {
       method: "POST",

@@ -7,11 +7,17 @@ from services.auth_services import decode_access_token
 import shutil
 import os
 import uuid
+from pydantic import BaseModel
 
 router = APIRouter()
 
 UPLOAD_DIR = "uploads/avatars"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+class UpdateProfileRequest(BaseModel):
+    name: str = None
+    username: str = None
+    phone: str = None
 
 
 @router.post("/avatar")
@@ -81,5 +87,41 @@ async def remove_avatar(
 
         return {"message": "Avatar removed successfully"}
 
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.put("/update")
+async def update_profile(
+    token: str,
+    body: UpdateProfileRequest,
+    db: Session = Depends(get_db),
+):
+    try:
+        payload = decode_access_token(token)
+        email = payload.get("sub")
+        user = db.query(User).filter(User.email == email).first()
+
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        if body.name is not None:
+            user.name = body.name
+
+        if body.username is not None:
+            existing = db.query(User).filter(User.username == body.username, User.id != user.id).first()
+            if existing:
+                raise HTTPException(status_code=400, detail="Username already taken")
+            user.username = body.username
+
+        if body.phone is not None:
+            user.phone = body.phone
+
+        db.commit()
+
+        return {"message": "Profile updated successfully"}
+
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))

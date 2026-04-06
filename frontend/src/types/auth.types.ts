@@ -45,5 +45,6 @@ export interface User {
     is_active: boolean;
     provider: string;
     avatar: string | null;
+    phone: string | null;
     created_at: string;
 }

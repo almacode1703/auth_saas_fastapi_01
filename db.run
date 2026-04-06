@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Running database migrations..."
+docker exec -i auth-saas-db-1 psql -U admin -d authsaasdb < backend/migrations.sql
+echo "Migrations complete!"

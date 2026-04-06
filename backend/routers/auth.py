@@ -91,6 +91,7 @@ def me(token: str, db: Session = Depends(get_db)):
             "is_active": user.is_active,
             "provider": user.provider,
             "avatar": user.avatar,
+            "phone": user.phone,
             "created_at": user.created_at,
         }
     except Exception as e:

@@ -32,6 +32,18 @@ export default function AccountSettings() {
     }
   });
 
+  const { mutate: updateProfile, isPending: isSaving } = useMutation({
+    mutationFn: authService.updateProfile,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      setIsEditing(false);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
+    onError: (error: any) => {
+      toast.error(error.detail || "Update failed");
+    },
+  });
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-12">
@@ -143,13 +155,17 @@ export default function AccountSettings() {
             >
               <Button
                 onClick={() => {
-                  toast.success("Profile updated successfully");
-                  setIsEditing(false);
+                  updateProfile({
+                    name: name || undefined,
+                    username: username || undefined,
+                    phone: phone || undefined,
+                  });
                 }}
+                disabled={isSaving}
                 className="gap-2"
               >
                 <Save className="w-4 h-4" />
-                Save Changes
+                {isSaving ? "Saving..." : "Save Changes"}
               </Button>
             </motion.div>
           )}
