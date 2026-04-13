@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Stopping any running containers..."
+docker stop $(docker ps -aq) 2>/dev/null
+echo "Starting InstAShark services..."
+docker compose up -d --build
+echo ""
+echo "Services running:"
+docker ps --format "table {{.Names}}\t{{.Ports}}\t{{.Status}}"

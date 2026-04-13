@@ -44,6 +44,12 @@ services:
     env_file:
       - ./voice-service/.env
     restart: on-failure
+    
+  ml-service:
+    build: ./ml-service
+    ports:
+      - "8004:8004"
+    restart: on-failure
 volumes:
   authsaas_data:
   rag_data:
